@@ -30,7 +30,7 @@ jobs:
         run: dotnet restore -r win-x64 ./Il2CppInspector.GUI
       
       - name: Build GUI
-        run: dotnet publish ./Il2CppInspector.GUI/Il2CppInspector.GUI.csproj -c Release -r win-x64 --self-contained
+        run: dotnet publish ./Il2CppInspector.GUI/Il2CppInspector.GUI.csproj -c Release -r win-x64 --no-self-contained
 
       - name: Upload GUI Artifact
         uses: actions/upload-artifact@v4
