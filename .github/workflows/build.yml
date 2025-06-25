@@ -30,7 +30,7 @@ jobs:
         run: dotnet restore -r win-x64 ./Il2CppInspector.GUI
       
       - name: Build GUI
-        run: dotnet publish ./Il2CppInspector.GUI/Il2CppInspector.GUI.csproj -c Release -r win-x64 --no-self-contained
+        run: dotnet publish ./Il2CppInspector.GUI/Il2CppInspector.GUI.csproj -c Release -r win-x64 --self-contained
 
       - name: Upload GUI Artifact
         uses: actions/upload-artifact@v4
@@ -71,7 +71,7 @@ jobs:
         run: dotnet restore -r ${{ matrix.rid }} ./Il2CppInspector.CLI
 
       - name: Build & Publish
-        run: dotnet publish -c Release --no-self-contained --no-restore -o ./${{ matrix.rid }} -r ${{ matrix.rid }} ./Il2CppInspector.CLI/Il2CppInspector.CLI.csproj
+        run: dotnet publish -c Release --self-contained --no-restore -o ./${{ matrix.rid }} -r ${{ matrix.rid }} ./Il2CppInspector.CLI/Il2CppInspector.CLI.csproj
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
