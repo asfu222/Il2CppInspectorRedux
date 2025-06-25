@@ -93,7 +93,9 @@ jobs:
           mkdir release_zips
           for dir in artifacts/*/; do
             artifact_name=$(basename "$dir")
-            zip -r "release_zips/${artifact_name}.zip" "$dir"
+            cd "$dir"
+            zip -r "../../release_zips/${artifact_name}.zip" .
+            cd - > /dev/null
           done
 
       - name: Create GitHub Release and upload assets
