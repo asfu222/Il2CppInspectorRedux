@@ -88,9 +88,17 @@ jobs:
         with:
           path: artifacts
 
+      - name: Create release zips
+        run: |
+          mkdir release_zips
+          for dir in artifacts/*/; do
+            artifact_name=$(basename "$dir")
+            zip -r "release_zips/${artifact_name}.zip" "$dir"
+          done
+
       - name: Create GitHub Release and upload assets
         uses: softprops/action-gh-release@v2
         with:
           tag_name: build-${{ github.run_id }}
-          files: artifacts/**/*
+          files: release_zips/*.zip
     
