@@ -57,7 +57,9 @@ namespace Il2CppInspector.Outputs
             var ns = $"{typeof(PythonScript).Namespace}.ScriptResources";
             var baseScipt = ResourceHelper.GetText($"{ns}.shared_base.py");
             var impl = ResourceHelper.GetText($"{ns}.Targets.{target}.py");
-
+            if (target == "Ghidra") {
+                baseScipt = baseScipt.Insert(0, "#@runtime PyGhidra\n");
+            }
             var script = string.Join("\n", baseScipt, impl)
                 .Replace("%SCRIPTFILENAME%", Path.GetFileName(outputFile))
                 .Replace("%TYPE_HEADER_RELATIVE_PATH%", typeHeaderRelativePath.ToEscapedString())
@@ -80,3 +82,4 @@ namespace Il2CppInspector.Outputs
                                          + Path.GetFileName(to);
     }
 }
+
